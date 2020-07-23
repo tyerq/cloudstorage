@@ -5,7 +5,14 @@ import os
 from _hashlib import HASH
 from typing import BinaryIO, Dict, Generator, Optional, TextIO, Tuple, Union
 
-import magic  # type: ignore
+try:
+    import magic  # type: ignore
+except ImportError as e:
+    try:
+        import puremagic as magic
+    except ImportError:
+        raise from e
+
 
 from cloudstorage.typed import FileLike
 
